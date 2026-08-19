@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# gate-git.sh — PreToolUse gate on the Bash tool.
+# gate-git.sh: PreToolUse gate on the Bash tool.
 #
 # Denies: pushing to a protected branch, force pushing, deleting a branch,
 # deleting a tag, and hard-resetting a protected branch.

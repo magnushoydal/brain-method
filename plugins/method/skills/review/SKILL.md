@@ -19,9 +19,9 @@ When building gets fast, judgement becomes the bottleneck. This skill is the jud
 
 Exactly three buckets. No fourth bucket, no "nitpick" escape hatch.
 
-- **Must fix** — it is wrong, unsafe, loses data, breaks a documented contract, or violates `POLICY.md`.
-- **Should fix** — it works but will cost someone later: unclear naming, a silent failure path, a missing log line, duplicated logic.
-- **Okay to ship** — noted and deliberately accepted. Say why it is acceptable.
+- **Must fix**: it is wrong, unsafe, loses data, breaks a documented contract, or violates `POLICY.md`.
+- **Should fix**: it works but will cost someone later: unclear naming, a silent failure path, a missing log line, duplicated logic.
+- **Okay to ship**: noted and deliberately accepted. Say why it is acceptable.
 
 Each finding gets a file path and a line reference. A finding without a location is an opinion.
 

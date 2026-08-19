@@ -16,7 +16,7 @@ One task. One finish line. One reviewable change. A ticket that cannot be finish
 ## Step 2. Write `specs/NNN-short-slug.md`
 
 ```markdown
-# NNN — <imperative title, under ten words>
+# NNN: <imperative title, under ten words>
 
 - Status: open
 - Created: <YYYY-MM-DD>

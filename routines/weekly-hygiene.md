@@ -1,4 +1,4 @@
-# Routine — Weekly method hygiene
+# Routine: Weekly method hygiene
 
 **Where:** claude.ai/code/routines
 **Trigger:** schedule, weekly, Sunday evening
@@ -17,7 +17,7 @@ nothing.
 FIRST: if PAUSE exists in the brain-ops root, note it in your report and
 continue. A deliberate pause is information, not an error.
 
-Run these seven checks and report each with a verdict of ok, drift or unknown.
+Run these nine checks and report each with a verdict of ok, drift or unknown.
 
 1. Version truth. For every file listed in brain-common/CHANGELOG.md's version
    index, confirm the file exists and that its own stated version matches the
@@ -47,6 +47,19 @@ Run these seven checks and report each with a verdict of ok, drift or unknown.
    present and executable, and that hooks.json still references all four. If a
    gate has been silently disabled, that is the highest-priority finding in the
    report regardless of what else you found.
+
+8. Submodule drift. For brain-personal and brain-company, compare the commit
+   their common/ submodule points at against the tip of brain-common's main. If a
+   vault is behind, say by how many commits and name what changed in POLICY.md or
+   templates/ in between. A vault running against a stale POLICY.md is following
+   rules that have since been revised, and nothing else in this system would
+   report that.
+
+9. Stale roadmaps. For every repo, read the Updated: date in ROADMAP.md and the
+   current goal. Flag any roadmap older than 30 days, and any whose done test
+   appears to have already been met. CLAUDE.md imports ROADMAP.md, so an
+   out-of-date goal is asserted to every session as current context, which is
+   worse than having no roadmap at all.
 
 Write the report to brain-ops/logs/hygiene-<today>.md on a claude/ branch. Lead
 with the verdict: either "nothing needs attention" or the single most important

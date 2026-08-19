@@ -77,3 +77,38 @@ routines/weekly-hygiene.md          the routine prompt to paste into claude.ai
 `plugin.json` has no `version` field on purpose. With a git source and no
 declared version, Claude Code uses the resolved commit SHA, so a push is a
 release and there is no version field to forget to bump.
+
+## Patching this repo
+
+`method` now denies commits to `main`, and it applies to this repository too. So
+changing a gate follows the same flow as any other change, which is the point:
+
+```bash
+cd ~/Developer/brain-method
+git checkout -b claude/<what-changed>
+# edit, then let Claude commit and push the branch and open the PR
+gh pr merge <n> --squash --delete-branch
+```
+
+Then refresh the installed copy, in this order, because the plugin is served from
+the marketplace's local clone rather than fetched separately:
+
+```
+/plugin marketplace update magnus-method
+/plugin update method@magnus-method
+```
+
+Verify the new version is the one running:
+
+```bash
+ls ~/.claude/plugins/cache/*/method/
+```
+
+The directory name is the commit SHA. If it is not the SHA you just merged, the
+refresh did not land and the old gates are still the live ones. Old version
+directories are left behind on purpose and are harmless.
+
+One consequence worth stating plainly: while you are editing a gate on a branch,
+the gate protecting you is the last released one, not the one in your working
+tree. Test a gate by piping fake hook JSON into the script directly rather than
+by trying to trigger it through Claude.
