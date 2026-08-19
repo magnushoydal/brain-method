@@ -1,0 +1,57 @@
+{
+  "description": "Method guardrails: protect main, protect credentials, honour PAUSE, lint shell after edits.",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/gate-git.sh",
+            "args": [],
+            "timeout": 15,
+            "statusMessage": "Checking git safety"
+          }
+        ]
+      },
+      {
+        "matcher": "Read|Edit|Write|NotebookEdit|Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/gate-secrets.sh",
+            "args": [],
+            "timeout": 15,
+            "statusMessage": "Checking for credential paths"
+          }
+        ]
+      },
+      {
+        "matcher": "Edit|Write|NotebookEdit|Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/gate-pause.sh",
+            "args": [],
+            "timeout": 15,
+            "statusMessage": "Checking PAUSE sentinel"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/post-edit-shellcheck.sh",
+            "args": [],
+            "timeout": 30,
+            "statusMessage": "Linting shell"
+          }
+        ]
+      }
+    ]
+  }
+}

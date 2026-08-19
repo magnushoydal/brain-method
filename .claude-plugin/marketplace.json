@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "magnus-method",
+  "description": "Magnus Hoydal's build method for Claude Code: repo brain scaffolding, plan-first workflow, verification, review standard and guardrails.",
+  "owner": {
+    "name": "Magnus Hoydal",
+    "url": "https://github.com/magnushoydal"
+  },
+  "plugins": [
+    {
+      "name": "method",
+      "source": "./plugins/method",
+      "description": "One consistent way of working: kickoff, plan, ticket, verify, review, wrap, plus four hard guardrails.",
+      "category": "productivity",
+      "keywords": ["method", "workflow", "second-brain", "guardrails"]
+    }
+  ]
+}

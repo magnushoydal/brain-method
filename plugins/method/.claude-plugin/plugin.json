@@ -1,0 +1,9 @@
+{
+  "name": "method",
+  "description": "A single, repeatable way of building and maintaining projects with Claude Code. Scaffolds the repo brain, forces plan before build, one ticket at a time, verification before review, a written review standard, and a wrap step that leaves session state on disk. Ships four PreToolUse guardrails.",
+  "author": {
+    "name": "Magnus Hoydal"
+  },
+  "homepage": "https://github.com/magnushoydal/brain-method",
+  "repository": "https://github.com/magnushoydal/brain-method"
+}

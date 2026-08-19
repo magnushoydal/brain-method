@@ -1,0 +1,38 @@
+{
+  "extraKnownMarketplaces": {
+    "magnus-method": {
+      "source": {
+        "source": "github",
+        "repo": "magnushoydal/brain-method"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "method@magnus-method": true
+  },
+  "permissions": {
+    "defaultMode": "plan",
+    "deny": [
+      "Read(**/.env)",
+      "Read(**/.env.*)",
+      "Read(**/.ssh/**)",
+      "Read(**/.aws/**)",
+      "Read(**/.netrc)",
+      "Read(**/.git-credentials)",
+      "Read(**/id_rsa)",
+      "Read(**/id_ed25519)",
+      "Read(**/*.pem)",
+      "Read(**/restricted/**)",
+      "Edit(**/.env)",
+      "Edit(**/restricted/**)",
+      "Bash(git push --force:*)",
+      "Bash(git push -f:*)",
+      "Bash(git push origin main:*)",
+      "Bash(git push origin master:*)",
+      "Bash(git branch -D:*)",
+      "Bash(git reset --hard:*)",
+      "Bash(security find-generic-password:*)",
+      "Bash(printenv:*)"
+    ]
+  }
+}
