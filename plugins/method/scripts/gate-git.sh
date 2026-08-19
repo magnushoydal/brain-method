@@ -82,7 +82,17 @@ if printf '%s' "$flat" | grep -Eq 'git +push'; then
   fi
 fi
 
-# 5. Hard reset while on a protected branch.
+# 5. Committing while on a protected branch. This is the check that has to come
+# before the push check to be useful: a commit that is only stopped at push time
+# leaves work on main that someone then pushes by hand, which is the outcome the
+# rule exists to prevent.
+if printf '%s' "$flat" | grep -Eq 'git +commit'; then
+  if [[ -n "$branch" ]] && printf '%s' "$branch" | grep -Eq "$PROTECTED_RE"; then
+    deny "Committing to '$branch' is blocked by the method guardrail. Create a claude/ branch first: git checkout -b claude/<short-slug>, then commit there. The owner merges. This fires at commit time rather than push time on purpose, so work does not accumulate on a protected branch and then need rescuing."
+  fi
+fi
+
+# 6. Hard reset while on a protected branch.
 if printf '%s' "$flat" | grep -Eq 'git +reset[^;&|]*--hard'; then
   if [[ -n "$branch" ]] && printf '%s' "$branch" | grep -Eq "$PROTECTED_RE"; then
     deny "git reset --hard on '$branch' is blocked by the method guardrail. Uncommitted work would be unrecoverable."
