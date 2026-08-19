@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# post-edit-shellcheck.sh — PostToolUse, after Edit or Write.
+# post-edit-shellcheck.sh: PostToolUse, after Edit or Write.
 #
 # Blocks nothing: the edit already happened. Exits 2 when it has something to
 # say, because on PostToolUse that is the only exit code whose stderr reaches

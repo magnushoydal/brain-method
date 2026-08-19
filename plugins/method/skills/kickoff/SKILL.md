@@ -10,14 +10,22 @@ Version 1.0.0
 
 Two modes. Decide which one applies before writing anything.
 
-- **fresh** — the repo has no `CLAUDE.md`. Create the full set.
-- **adopt** — the repo already has structure and possibly a `CLAUDE.md`. Add only what is missing. Never restructure.
+- **fresh**: the repo has no `CLAUDE.md`. Create the full set.
+- **adopt**: the repo already has structure and possibly a `CLAUDE.md`. Add only what is missing. Never restructure.
 
 Detect the mode yourself. Do not ask which one unless the answer is genuinely ambiguous.
 
 ## Rule that overrides everything else in this skill
 
 **Never move, rename or reorganise an existing file or directory.** Two brains of different shapes use this method. The method is the files listed below and nothing more. If an existing repo puts its docs in `docs/` and its code in `apps/`, that is correct for that repo and none of your business.
+
+**One exception, and only this one.** If an existing `CLAUDE.md` refers to
+`POLICY.md` in prose but does not import it with `@`, add the import line and
+leave every existing line untouched. The difference is not cosmetic: an `@` import
+is loaded into context every session by the harness, while a prose instruction is
+a request the model may or may not act on. The outbound prohibition and the
+append-only rule are too important to be advisory. Show the one-line diff and say
+why.
 
 ## Step 1. Read before writing
 
@@ -43,7 +51,7 @@ Copy from `${CLAUDE_PLUGIN_ROOT}/scaffold/` and fill in the placeholders. In ado
 
 | Target | From scaffold | Notes |
 |---|---|---|
-| `CLAUDE.md` | `CLAUDE.md` | Keep under 40 lines. Add the `@common/POLICY.md` import line only if that path exists |
+| `CLAUDE.md` | `CLAUDE.md` | Keep it short. Add the `@common/POLICY.md` import only if that path exists. If the file already exists, add the import line and change nothing else. Skip this file entirely for a repo consumed as a submodule (see below) |
 | `ROADMAP.md` | `ROADMAP.md` | The current goal and its done test. One goal, not a wish list |
 | `REVIEW.md` | `REVIEW.md` | The standard `/method:review` judges against |
 | `DECISIONS.md` | `DECISIONS.md` | Append-only. Seed it with any decision made during this kickoff |
@@ -53,6 +61,20 @@ Copy from `${CLAUDE_PLUGIN_ROOT}/scaffold/` and fill in the placeholders. In ado
 | `specs/.gitkeep` | n/a | Empty directory for tickets |
 
 `.claude/settings.json` is the file that makes the method arrive automatically in cloud sessions, because cloud runs read repo settings rather than the local machine's. Getting this file wrong is the one failure that makes unattended routines run without guardrails, so verify it parses as JSON before you finish.
+
+## Repos consumed as a submodule
+
+A repo that other repos mount as a submodule, `brain-common` being the case in
+point, must not carry its own `CLAUDE.md`. Claude Code discovers nested
+`CLAUDE.md` files in subdirectories as it reads files under them, so a submodule's
+roadmap and conventions would load into every session working in the parent vault,
+asserting a goal that has nothing to do with the task at hand.
+
+Detect this by checking whether the repo is referenced in any `.gitmodules` you
+can see, or by asking one question if you cannot tell. For such a repo: write
+`ROADMAP.md`, `REVIEW.md`, `DECISIONS.md`, `.claude/rules/` and
+`.claude/settings.json` as usual, but not `CLAUDE.md`, and say in your report
+that you skipped it and why.
 
 ## Step 4. Report, then stop
 

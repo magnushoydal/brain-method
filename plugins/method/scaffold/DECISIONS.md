@@ -7,7 +7,7 @@ Each entry: the date, the decision, the reason, and what it rules out.
 
 ---
 
-## {{DATE}} — {{FIRST_DECISION}}
+## {{DATE}}: {{FIRST_DECISION}}
 
 **Because:** {{REASON}}
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# gate-secrets.sh — PreToolUse gate on file tools and Bash.
+# gate-secrets.sh: PreToolUse gate on file tools and Bash.
 #
 # Denies reads and writes of credential-bearing paths, and Bash commands that
 # would cat, grep or copy them. This is the enforcement half of the rule that

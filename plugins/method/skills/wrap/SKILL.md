@@ -15,9 +15,9 @@ Remote sessions are amnesiac. Anything not written to a file is gone, and next w
 Append to `CHANGELOG.md`, newest first. In `brain-common` this file carries a version index table; update the row for every file you touched and bump its version.
 
 Semver as used here:
-- **patch** — a bug fixed, no behaviour anyone relied on has changed
-- **minor** — new behaviour, existing behaviour intact
-- **major** — something that worked before now works differently
+- **patch**: a bug fixed, no behaviour anyone relied on has changed
+- **minor**: new behaviour, existing behaviour intact
+- **major**: something that worked before now works differently
 
 Every entry says what changed and **why**, in that order. An entry that only lists files is a `git log` with extra steps.
 
